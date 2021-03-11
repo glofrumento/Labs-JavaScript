@@ -1,0 +1,16 @@
+{
+  "name": "callback-cromise-asyncawait",
+  "version": "1.0.0",
+  "description": "",
+  "main": "read3files-async.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "readfile": "^1.0.1"
+  }
+}
