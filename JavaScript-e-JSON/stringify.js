@@ -22,16 +22,3 @@ function replacer(key, value) {
 
 personaJSON = JSON.stringify(persona, replacer, 2);
 console.log(personaJSON);
-
-
-const utente = {
-  nome: "Mario",
-  cognome: "Rossi",
-  eta: 20,
-  toJSON() {
-    return {
-      nomeCompleto: `${this.nome} ${this.cognome}`
-    };
-  }
-}
-console.log(JSON.stringify(utente, null, 2));
