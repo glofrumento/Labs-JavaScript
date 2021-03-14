@@ -5,22 +5,22 @@ import reader from 'xlsx'
 const file = reader.readFile('./test.xlsx')
 
 // Sample data set 
-let student_data = [{
-  Student: 'Nikhil',
-  Age: 22,
-  Branch: 'ISE',
-  Marks: 70
+let datiStudente = [{
+  Studente: 'Giuseppe Verdi',
+  Eta: 22,
+  Dipartimento: 'ICT',
+  Crediti: 70
 },
 {
-  Name: 'Amitha',
-  Age: 21,
-  Branch: 'EC',
-  Marks: 80
+  Studente: 'Franco Nero',
+  Eta: 21,
+  Dipartimento: 'AI',
+  Crediti: 80
 }]
 
-const ws = reader.utils.json_to_sheet(student_data)
+const ws = reader.utils.json_to_sheet(datiStudente)
 
-reader.utils.book_append_sheet(file, ws, "Sheet3")
+reader.utils.book_append_sheet(file, ws, "Foglio3")
 
 // Writing to our file 
 reader.writeFile(file, './test.xlsx')

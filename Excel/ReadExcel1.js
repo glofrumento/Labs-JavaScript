@@ -1,4 +1,6 @@
 // Requiring the module 
+//const readXlsxFile = require('read-excel-file/node');
+//import readXlsxFile from 'read-excel-file'
 const readXlsxFile = require('read-excel-file/node');
 
 // File path.
