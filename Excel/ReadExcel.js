@@ -42,6 +42,7 @@ foglio.forEach(row => {
       continue;
     }
     if (p == 7 || p == 8) {
+      console.log(p, valori[p], "typeof", typeof fromExcelHoursToJsHours(valori[p]));
       data.push(pad(df(fromExcelHoursToJsHours(valori[p]), "HH:MM:ss"), spaziatura, charPad));
       continue;
     }
