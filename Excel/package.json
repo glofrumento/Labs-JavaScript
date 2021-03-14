@@ -1,5 +1,5 @@
 {
-  "name": "Excel",
+  "name": "excel",
   "version": "1.0.0",
   "description": "",
   "main": "ReadExcel.js",
@@ -9,7 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "dependencies": {
+    "dateformat": "^4.5.1",
     "read-excel-file": "^5.0.0",
     "xlsx": "^0.16.9"
   }

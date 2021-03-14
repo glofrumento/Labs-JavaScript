@@ -1,4 +1,5 @@
-const reader = require('xlsx')
+//const reader = require('xlsx')
+import reader from 'xlsx'
 
 // Reading our test file 
 const file = reader.readFile('./test.xlsx')
