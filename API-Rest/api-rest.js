@@ -13,6 +13,7 @@ app.use(express.json());    // parsifica application/json
 app.use(xmlparser());       // parsifica application/xml
 app.use(express.urlencoded({ extended: true }));  // parsifica application/x-www-form-urlencoded
 
+// Port di ascolto
 const PORT = 3000;
 
 // formattazione dati JSON con due spazi di tab
@@ -42,7 +43,7 @@ app.get('/:id/subresource/:subid', function (req, res) {
 });
 
 
-// Richieste PUT
+// Richiesta PUT
 //
 // curl -X PUT localhost:3000/123
 app.put('/:id', function (req, res) {
@@ -51,7 +52,7 @@ app.put('/:id', function (req, res) {
 });
 
 
-// Richieste PATCH
+// Richiesta PATCH
 //
 // curl -X PATCH localhost:3000/123
 app.patch('/:id', function (req, res) {
