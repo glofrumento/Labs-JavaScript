@@ -1,40 +1,79 @@
-var express = require('express');
-//var bodyParser = require('body-parser');
+// const express = require('express');
+// const xmlparser = require('express-xml-bodyparser');
+// const jsonxml = require('jsontoxml');   // converte gli oggetti JSON in XML
 
-//require('body-parser-xml')(bodyParser);
-//*
-var xmlparser = require('express-xml-bodyparser');
+import express from 'express';
+import xmlparser from 'express-xml-bodyparser';
+import jsonxml from 'jsontoxml';   // converte gli oggetti JSON in XML
 
-var PORT = 3000;
+const app = express();
 
-// converte gli oggetti JSON in XML
-var jsonxml = require('jsontoxml');
-//var xml = require('xml');
+// MIDDLEWARE
+app.use(express.json());    // parsifica application/json
+app.use(xmlparser());       // parsifica application/xml
+app.use(express.urlencoded({ extended: true }));  // parsifica application/x-www-form-urlencoded
 
-var app = express();
-
-// parsifica application/json
-app.use(express.json());
-
-//* parsifica application/xml
-app.use(xmlparser());
-
-// parsifica application/xml
-// app.use(bodyParser.xml({
-//   limit: '1MB',   // Reject payload bigger than 1 MB 
-//   xmlParseOptions: {
-//     normalize: true,     // elimina gli spazi bianchi fra i nodi 
-//     normalizeTags: true, // Trasforma i tag in minuscolo 
-//     explicitArray: false // mette i nodi in un array solo se >1 
-//   }
-// }));
-
-// parsifica application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+const PORT = 3000;
 
 // formattazione dati JSON con due spazi di tab
 //app.set("json spaces", 2);
 
+
+// Richieste GET
+//
+// curl localhost:3000
+app.get('', function (req, res) {
+  res.set('Content-Type', 'text/plain');
+  res.status(200).send('API RESTful in JavaScript');
+});
+
+// passaggio di un parametro
+// curl localhost:3000/123
+app.get('/:id', function (req, res) {
+  res.set('Content-Type', 'text/plain');
+  res.status(200).send('Richiesta GET - id: ' + req.params.id);
+});
+
+// passaggio di due parametri
+// curl localhost:3000/123/subresource/456
+app.get('/:id/subresource/:subid', function (req, res) {
+  res.set('Content-Type', 'text/plain');
+  res.status(200).send('Richiesta GET - id: ' + req.params.id + ' subid: ' + req.params.subid);
+});
+
+
+// Richieste PUT
+//
+// curl -X PUT localhost:3000/123
+app.put('/:id', function (req, res) {
+  res.set('Content-Type', 'text/plain');
+  res.status(200).send('Richiesta PUT - id: ' + req.params.id);
+});
+
+
+// Richieste PATCH
+//
+// curl -X PATCH localhost:3000/123
+app.patch('/:id', function (req, res) {
+  res.set('Content-Type', 'text/plain');
+  res.status(200).send('Richiesta PATCH - id: ' + req.params.id);
+
+  // http://jsonpatch.com/
+  // http://jsonpatchjs.com/
+});
+
+
+// Richiesta DELETE
+//
+// curl -X DELETE localhost:3000/123
+app.delete('/:id', function (req, res) {
+  res.set('Content-Type', 'text/plain');
+  res.status(200).send('Richiesta DELETE - id: ' + req.params.id);
+});
+
+
+// Richiesta POST
+//
 // XML -->  <-- JSON
 // curl -X POST -d "<libro><autore>Clive Cussler</autore><titolo>Sahara</titolo></libro>" -H "Content-Type:application/xml" -H "Accept:application/json" localhost:3000/xml | jq
 
@@ -55,12 +94,12 @@ app.post('/xml', function (req, res) {
 
   switch (req.headers.accept) {
     case "application/xml":
-      console.log(req.body);
+      console.log('xml', req.body);
       res.set('Content-Type', 'application/xml');
-      //res.status(200).send(jsonxml(req.body));
       res.status(200).send(jsonxml(req.body, { /*prettyPrint: true,*/ xmlHeader: true }));
       break;
     case "application/json":
+      console.log('json', req.body);
       res.set('Content-Type', 'application/json');
       res.status(200).json(req.body);
       break;
